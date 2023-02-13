@@ -1,18 +1,19 @@
 package com.bank.authorization.AuthAPI.service;
 
 
+import com.bank.authorization.AuthAPI.dto.AuthDto;
 import com.bank.authorization.AuthAPI.entity.Auth;
 
 import java.util.List;
 
 public interface AuthService {
-    Auth createAuth(Auth auth);
+    AuthDto createAuth(Auth auth);
 
-    Auth getUserById(Long id);
+    AuthDto getUserById(Long id);
 
-    List<Auth> getAllRoles();
+    List<AuthDto> getAllRoles();
 
-    Auth updateAuth(Auth auth);
+    AuthDto updateAuth(AuthDto auth);
 
     void deleteAuth(Long id);
 }

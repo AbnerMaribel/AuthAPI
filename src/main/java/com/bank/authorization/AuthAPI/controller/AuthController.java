@@ -1,5 +1,6 @@
 package com.bank.authorization.AuthAPI.controller;
 
+import com.bank.authorization.AuthAPI.dto.AuthDto;
 import com.bank.authorization.AuthAPI.entity.Auth;
 import com.bank.authorization.AuthAPI.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -18,27 +19,27 @@ public class AuthController {
 
 
     @PostMapping
-    public ResponseEntity<Auth> createAuth(@RequestBody Auth auth) {
-        Auth savedAuth = authService.createAuth(auth);
+    public ResponseEntity<AuthDto> createAuth(@RequestBody Auth auth) {
+        AuthDto savedAuth = authService.createAuth(auth);
         return new ResponseEntity<>(savedAuth, HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Auth> getUserById(@PathVariable("id") Long id) {
-        Auth auth = authService.getUserById(id);
-        return new ResponseEntity<>(auth, HttpStatus.OK);
+    public ResponseEntity<AuthDto> getUserById(@PathVariable("id") Long id) {
+        AuthDto authDto = authService.getUserById(id);
+        return new ResponseEntity<>(authDto, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Auth>> getAllRoles() {
-        List<Auth> roles = authService.getAllRoles();
+    public ResponseEntity<List<AuthDto>> getAllRoles() {
+        List<AuthDto> roles = authService.getAllRoles();
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Auth> updateAuth(@PathVariable("id") Long id, @RequestBody Auth auth) {
-        auth.setProfile_id(id);
-        Auth updatedAuth = authService.updateAuth(auth);
+    public ResponseEntity<AuthDto> updateAuth(@PathVariable("id") Long id, @RequestBody AuthDto authDto) {
+        authDto.setProfile_id(id);
+        AuthDto updatedAuth = authService.updateAuth(authDto);
         return new ResponseEntity<>(updatedAuth, HttpStatus.OK);
     }
 
