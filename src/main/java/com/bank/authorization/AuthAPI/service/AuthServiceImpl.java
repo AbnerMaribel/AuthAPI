@@ -2,7 +2,7 @@ package com.bank.authorization.AuthAPI.service;
 
 import com.bank.authorization.AuthAPI.dto.AuthDto;
 import com.bank.authorization.AuthAPI.entity.Auth;
-import com.bank.authorization.AuthAPI.mapper.AuthMapper;
+import com.bank.authorization.AuthAPI.mapper.AutoAuthMapper;
 import com.bank.authorization.AuthAPI.repository.AuthRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthDto createAuth(Auth auth) {
-        return AuthMapper.mapToAuthDto(authRepository.save(auth));
+        return AutoAuthMapper.MAPPER.mapToAuthDto(authRepository.save(auth));
     }
 
     @Override
@@ -31,13 +31,13 @@ public class AuthServiceImpl implements AuthService {
                 break;
             }
         }
-        return AuthMapper.mapToAuthDto(auth);
+        return AutoAuthMapper.MAPPER.mapToAuthDto(auth);
     } //TODO Optional
 
     @Override
     public List<AuthDto> getAllRoles() {
         return authRepository.findAll()
-                .stream().map(AuthMapper::mapToAuthDto).collect(Collectors.toList());
+                .stream().map(AutoAuthMapper.MAPPER::mapToAuthDto).collect(Collectors.toList());
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
                 break;
             }
         }
-        return AuthMapper.mapToAuthDto(updatedAuth);
+        return AutoAuthMapper.MAPPER.mapToAuthDto(updatedAuth);
     }
 
     @Override
